@@ -8,7 +8,7 @@ WIDTH = 6  # Width of the board
 HEIGHT = 6  # Height of the board
 MOVE_COUNT_POS = (500, 100)  # Position of the move count text
 # Colors
-BACKGROUND_COLOR = (30, 30, 30)
+BACKGROUND_COLOR = (60, 60, 60)
 BLOCK_COLORS = {
     'R': (255, 0, 0),
     'G': (0, 255, 0),
