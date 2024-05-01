@@ -34,7 +34,7 @@ This is a simple color matching game built using the Python library Pygame. In t
 4. Run the game:
 
     ```
-    /bin/python3 "<path_to_Puzzle_League_v1.py>"
+    /bin/python3 'main.py'
     ```
 
 ## Credits
