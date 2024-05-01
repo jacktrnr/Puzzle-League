@@ -96,6 +96,7 @@ def collapse_board(board):
 def process_game_logic(board):
     """Handles match finding, clearing, and collapsing, allowing for chain reactions."""
     while True:  # Start an indefinite loop to handle potential chains
+        collapse_board(board)
         matches = find_matches(board)
         if matches:
             clear_matches(board, matched=matches)
