@@ -6,7 +6,7 @@ BLOCK_SIZE = 60  # Size of the block
 BOARD_POS = (100, 100)  # Top-left position of the board on the window
 WIDTH = 6  # Width of the board
 HEIGHT = 6  # Height of the board
-
+MOVE_COUNT_POS = (500, 100)  # Position of the move count text
 # Colors
 BACKGROUND_COLOR = (30, 30, 30)
 BLOCK_COLORS = {
@@ -16,11 +16,19 @@ BLOCK_COLORS = {
     'P': (255, 0, 255),
     ' ': (0, 0, 0)  # Empty space color
 }
-CURSOR_COLOR = (50, 50, 50)  # Darker cursor color
+TEXT_COLOR = (255, 255, 255)
+CURSOR_COLOR = (255, 255, 255)  # Darker cursor color
+
+# Set window size
+WINDOW_WIDTH = 1000
+WINDOW_HEIGHT = 600
 
 # Initialize pygame
 pygame.init()
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Puzzle League")
+
+font = pygame.font.SysFont(None, 24)
 
 def initialize_board():
     """Initializes a simple 6x6 board with a predefined setup for demonstration."""
@@ -102,7 +110,7 @@ def main():
     board = initialize_board()
     cursor_pos = [0, 0]  # Starting position of the cursor [row, column]
     clock = pygame.time.Clock()
-
+    move_count = 0  # Initialize move count
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -130,17 +138,39 @@ def main():
 
                         # Process the game logic after swapping
                         process_game_logic(board)
+                        move_count += 1  # Increment move count on valid move
                     else:
                         print("Cursor at edge, no swap possible.")
                 elif event.key == pygame.K_BACKSPACE:
                     board = reset_game(board, cursor_pos)  # Reset the game when Backspace is pressed
-
+                    move_count = 0  # Reset move count
 
 
         screen.fill(BACKGROUND_COLOR)
         draw_board(board, cursor_pos)
+        # Display move count on the right-hand side
+        move_text = font.render("Moves: {}".format(move_count), True, TEXT_COLOR)
+        screen.blit(move_text, MOVE_COUNT_POS)
+        controls_text = [
+            "Controls:",
+            "Arrow keys: Move cursor",
+            "Enter: Swap blocks",
+            "Backspace: Reset game"
+        ]
+
+        # Display move count on the right-hand side
+        move_text = font.render("Moves: {}".format(move_count), True, TEXT_COLOR)
+        screen.blit(move_text, MOVE_COUNT_POS)
+
+        # Display controls text below the move count
+        control_y_pos = MOVE_COUNT_POS[1] + move_text.get_height() + 10  # Adjust vertical position
+        for i, line in enumerate(controls_text):
+            control_text = font.render(line, True, TEXT_COLOR)
+            control_text_pos = (MOVE_COUNT_POS[0], control_y_pos + i * (control_text.get_height() + 5))
+            screen.blit(control_text, control_text_pos)
+
         pygame.display.flip()
         clock.tick(30)  # Limits the frame rate to 30 FPS
-
+        
 if __name__ == "__main__":
     main()
