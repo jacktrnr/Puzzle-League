@@ -1,7 +1,7 @@
 # Puzzle-League
 Demo of Pokemon Puzzle League
 
-This is a simple color matching game built using the Python library Pygame. In this game, your objective is to match three or more blocks of the same color in a row or column to clear them from the board. In this demo, we have initialized with a puzzle (that apparently you can solve in 2 moves), but you can add your own puzzle if you want.
+This is a simple color matching game built using the Python library Pygame. In this game, your objective is to match three or more blocks of the same color in a row or column to clear them from the board. Chain reactions due to gravity can occur. In this demo, we have initialized with a puzzle (that apparently you can solve in 2 moves), but you can add your own puzzle if you want.
 
 ## How to Play
 
